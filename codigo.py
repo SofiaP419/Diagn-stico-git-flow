@@ -1,7 +1,9 @@
 import json
+import pandas as pd 
 
 def top_tweets(datos):
-    pass
+    df = datos.nlargest(10, "retweetCount")
+    return print(df["content"].to_markdown())
 
 def top_usuarios(datos):
     pass
@@ -15,7 +17,7 @@ def top_hashtags(datos):
 
 def main():
     f = open("farmers-protest-tweets-2021-03-5.json")
-    datos = json.load(f)
+    datos = pd.read_json("farmers-protest-tweets-2021-03-5.json")
     
     top_tweets(datos)
     top_usuarios(datos)
@@ -23,3 +25,5 @@ def main():
     top_dias(datos)
 
     f.close()
+
+main()
